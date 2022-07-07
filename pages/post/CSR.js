@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 function CSR() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://jsonplaceholder.typicode.com/users`)
+    fetch(`https://worldtimeapi.org/api/ip`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -16,6 +16,7 @@ function CSR() {
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
+  console.log(data);
 
   return (
     <>
@@ -25,12 +26,7 @@ function CSR() {
         </Link>
       </h2>
       <br />
-      {data &&
-        data.map((item) => (
-          <>
-            <h1>{item.name}</h1>
-          </>
-        ))}
+      <h2>{data && data.datetime}</h2>
     </>
   );
 }

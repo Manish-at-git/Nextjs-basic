@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { useState } from "react";
 
-const SSR = ({ data }) => {
+const SSR = ({ dateTime }) => {
   return (
     <>
       <h2>
@@ -9,22 +8,19 @@ const SSR = ({ data }) => {
           <a>Go Back to home</a>
         </Link>
       </h2>
-      <br />
-      {data.map((item) => (
-        <>
-          <h1>{item.name}</h1>
-        </>
-      ))}
+      <div>
+        <h1>{dateTime}</h1>
+      </div>
     </>
   );
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+  const res = await fetch(`https://worldtimeapi.org/api/ip`);
   const response = await res.json();
 
   return {
-    props: { data: response },
+    props: { dateTime: response.datetime },
   };
 }
 
