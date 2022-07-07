@@ -22,6 +22,7 @@ export async function getStaticProps() {
 
   return {
     props: { dateTime: response.datetime },
+    revalidate: 10,
   };
 }
 export default SSG;
